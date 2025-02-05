@@ -51,7 +51,7 @@ const vendorLogin = async(req,res)=>{
 
 const getAllvendors = async(req,res)=>{
     try {
-        const vendors = await Vendor.find()
+        const vendors = await Vendor.find().populate('firm')
     if(!vendors){
         res.status(404).send({error:"vendor not found"})
     }
@@ -69,7 +69,7 @@ const getvendorById = async(req,res)=>{
 
         const vendorId = req.params.id
 
-        const vendor = await Vendor.findById(vendorId)
+        const vendor = await Vendor.findById(vendorId).populate('firm')
         if(!vendor){
             res.status(404).send({error:"No vendor found"})
         }
